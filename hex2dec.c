@@ -5,15 +5,18 @@ long hex2dec(char * a) {
 	long n = 0;
 	
 	while (*a) {
-		c = *a++ - '0';
+		c = *a++;
 
-		if (c >= 17 && c <= 23) {
-			c -= 7;
+		if (c >= '0' && c <= '9') {
+			c -= '0';
 
-		} else if (c >= 49 && c <= 54) {
-			c -= 39;
+		} else if (c >= 'a' && c <= 'f') {
+			c = (c - 'a') + 10;
 
-		} else if (c > 10 || c < 0) {
+		} else if (c >= 'A' && c <= 'F') {
+			c = (c - 'A') + 10;
+
+		} else {
 			goto INVALID;
 		}
 
@@ -37,7 +40,7 @@ int main(int argc, char ** argv) {
 			fprintf(stderr, "%s input is invalid.\n", argv[i]);
 
 		} else {
-			printf("%s: %i\n", argv[i], n);
+			printf("%s: %li\n", argv[i], n);
 		}
 	}
 
